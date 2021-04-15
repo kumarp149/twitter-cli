@@ -1,0 +1,34 @@
+{
+  "name": "@sruteesh/twitter-cli",
+  "version": "1.0.1",
+  "description": "tweet from the command line",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm src/index.js",
+    "start": "npm link"
+  },
+  "bin": {
+    "twitter": "src/index.js"
+  },
+  "author": "sruteesh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kumarp149/twitter-cli.git"
+  },
+  "keywords": [
+    "twitter"
+  ],
+  "bugs": {
+    "url": "https://github.com/kumarp149/twitter-cli/issues"
+  },
+  "homepage": "https://github.com/kumarp149/twitter-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "clear": "^0.1.0",
+    "commander": "^7.2.0",
+    "dotenv": "^8.2.0",
+    "dotenv-safe": "^8.2.0",
+    "minimist": "^1.2.5"
+  }
+}
