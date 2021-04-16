@@ -4,8 +4,8 @@
   "description": "tweet from the command line",
   "main": "src/index.js",
   "scripts": {
-    "test": "npm src/index.js",
-    "start": "npm link"
+    "build": "npm src/index.js",
+    "start": "npm link && npm install"
   },
   "bin": {
     "twitter": "src/index.js"
