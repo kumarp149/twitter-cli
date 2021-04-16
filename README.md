@@ -19,6 +19,17 @@ It uses a number of open source projects to work:
 - [chalk] - Used for styling console outputs
 - [dotenv] - Used for storing twitter developer credentials locally
 
+## Usage
+
+You need to have [Node JS](https://nodejs.org) installed in your machine.
+
+Open command prompt and enter the following commands in order
+
+```sh
+mkdir twitter-cli
+cd twitter-cli
+npm install
+```
 
 
 
