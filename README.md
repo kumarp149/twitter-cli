@@ -29,6 +29,7 @@ Open command prompt and enter the following commands in order
 mkdir twitter-cli
 cd twitter-cli
 npm install
+npm start
 ```
 
 
