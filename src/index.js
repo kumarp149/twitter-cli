@@ -6,9 +6,12 @@ const { command } = require('commander');
 
 const command_args = [];
 
-command_args[0] = {command: "tweet",description: "command used for tweeting. Mention message with \"-m\" or \"--m\" and pic path with \"-p\" or \"--p\""}
+command_args[0] = {command: "init",description: "command to set twitter developer credentials"};
 
-command_args[1] = {command: "retweet",description: "command used for retweeting. Mention the tweet id with \"-i\" or \"--i\""}
+command_args[1] = {command: "tweet",description: "command used for tweeting. Mention message with \"-m\" or \"--m\" and path to the pic with \"-p\" or \"--p\""}
+
+command_args[2] = {command: "retweet",description: "command used for retweeting. Mention the tweet id with \"-i\" or \"--i\""}
+
 
 const command_flags = [];
 
@@ -80,6 +83,10 @@ else if (process.argv.length === 3)
     {
         show_usage();
     }
+    else if (process.argv[2] === "init")
+    {
+
+    }
     else if (process.argv[2] === "tweet" || process.argv[2] === "retweet")
     {
         show_tweet_error(process.argv[2]);
@@ -95,7 +102,7 @@ else if (process.argv.length === 3)
 else if (process.argv.length === 4)
 {
 
-    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage")
+    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage" && process.argv[2] !== "init")
     {
         console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'));
         show_usage();
@@ -141,7 +148,7 @@ else if (process.argv.length === 4)
 else if (process.argv.length === 5)
 {
 
-    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage")
+    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage" && process.argv[2] !== "init")
     {
         console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'));
         show_usage();
@@ -237,7 +244,7 @@ else if (process.argv.length == 6)
 
 else if (process.argv.length === 7)
 {
-    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage")
+    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage" && process.argv[2] !== "init")
     {
         console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'));
         show_usage();
@@ -291,7 +298,7 @@ else if (process.argv.length === 7)
 
 else if (process.argv.length >= 8)
 {
-    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage")
+    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage" && process.argv[2] !== "init")
     {
         console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'));
         show_usage();
