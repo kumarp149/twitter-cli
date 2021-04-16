@@ -1,6 +1,7 @@
 #!/usr/bin/env node 
 //const parseArgs = require('minimist');
 const chalk = require('chalk');
+
 const { command } = require('commander');
 
 const command_args = [];
@@ -202,15 +203,15 @@ else if (process.argv.length == 6)
             }
             else if (process.argv[5] !== "--p" && process.argv[5] !== "-p")
             {
-                console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[5]+'\"'+" with the argument \"retweet\""));
+                console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[5]+'\"'+" with the argument \"tweet\""));
                 show_usage();
             }
         }
 
         else if (process.argv[3] !== "--m" && process.argv[3] !== "-m")
         {
-            console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'+" with the argument \"retweet\""));
-            console.log(chalk.red("flag \"-i\" is expected with the argument \"retweet\". It specifies the id of the tweet to be retweeted"));
+            console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'+" with the argument \"tweet\""));
+            console.log(chalk.red("flag \"-m\" is expected with the argument \"tweet\". It specifies the message to be tweeted"));
         }
     }
 
@@ -218,7 +219,7 @@ else if (process.argv.length == 6)
     {
         if (process.argv[3] === "--i" || process.argv[3] === "-i")
         {
-            console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[5]+'\"'+" with the argument \"retweet\""));
+            console.log(chalk.red("[WARNING]: No arguments required after the flag "+'\"'+process.argv[3]+'\"'));
             show_usage();
         }
         else if (process.argv[3] !== "--i" && process.argv[3] !== "-i")
@@ -274,7 +275,7 @@ else if (process.argv.length === 7)
 
         else if (process.argv[3] === "--i" || process.argv[3] === "-i")
         {
-            console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[5]+'\"'+" with the argument \"retweet\""));
+            console.log(chalk.red("[WARNING]: No arguments required after the flag"+'\"'+process.argv[3]+'\"'));
             show_usage();
         }
 
@@ -286,4 +287,53 @@ else if (process.argv.length === 7)
         show_usage();
     }
 
+}
+
+else if (process.argv.length >= 8)
+{
+    if (process.argv[2] !== "tweet" && process.argv[2] !== "retweet" && process.argv[2] !== "--help" && process.argv[2] !== "-help" && process.argv[2] !== "--usage" && process.argv[2] !== "-usage")
+    {
+        console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[2]+'\"'));
+        show_usage();
+    }
+    else if (process.argv[2] === "tweet")
+    {
+        if (process.argv[3] === "--m" || process.argv[3] === "-m")
+        {
+            if (process.argv[5] === "--p" || process.argv[5] === "-p")
+            {
+                console.log(chalk.red("[WARNING]: No arguments required after the flag "+'\"'+process.argv[5]+'\"'));
+                show_usage();
+            }
+            else if (process.argv[5] !== "--p" && process.argv[5] !== "-p")
+            {
+                console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[5]+'\"'+" with the argument \"tweet\""));
+                show_usage();
+            }
+        }
+        else if (process.argv[3] !== "--m" && process.argv[3] !== "-m")
+        {
+            console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[3]+'\"'+" with the argument \"tweet\""));
+            show_usage();
+        }
+    }
+
+    else if (process.argv[2] === "retweet")
+    {
+        if (process.argv[3] === "--i" || process.argv[3] === "-i")
+        {
+            console.log(chalk.red("[WARNING]: No arguments required after the flag "+'\"'+process.argv[3]+'\"'));
+            show_usage();
+        }
+        else if (process.argv[3] !== "--i" && process.argv[3] !== "-i")
+        {
+            console.log(chalk.red("[ERROR]: Unexpected argument "+'\"'+process.argv[3]+'\"'+" with the argument \"retweet\""));
+            show_usage();
+        }
+    }
+    else
+    {
+        console.log(chalk.red("[WARNING]: No arguments required after "+'\"'+process.argv[2]+'\"'));
+        show_usage();
+    }
 }
