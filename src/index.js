@@ -2,6 +2,8 @@
 //const parseArgs = require('minimist');
 const chalk = require('chalk');
 
+const set_credentials = require('./../lib/init.js');
+
 const { command } = require('commander');
 
 const command_args = [];
