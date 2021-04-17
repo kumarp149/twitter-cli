@@ -33,6 +33,7 @@
     "inquirer": "^8.0.0",
     "minimist": "^1.2.5",
     "nconf": "^0.11.2",
+    "prompt-sync": "^4.2.0",
     "twitter": "^1.7.1"
   }
 }

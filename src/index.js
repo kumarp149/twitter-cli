@@ -10,6 +10,15 @@ const askPrompt = require("../lib/init.js");
 
 const session = require("../config/config.json");
 
+const readline = require("readline");
+
+const prompt = require('prompt-sync')();
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
 const command_args = [];
 
 const fs = require("fs");
@@ -93,22 +102,34 @@ else if (process.argv.length === 3)
     }
     else if (process.argv[2] === "init")
     {
-        askPrompt.overwrite()
-        .then((result) => {
-            console.log("SRUTEESH");
-            console.log(result);
-        })
-        //process.exit(1)
-        askPrompt.askcredentials()
-        .then((result) => {
-            fs.writeFile(__dirname + "/../config/config.json",JSON.stringify(result),err=>{
-                if (err){
-                    console.log(err);
-                    console.log(chalk.red("Error setting up credentials. Add the credentials manually in \"config/config.json\""));
-                }
-            })
-        })
-        //console.log(credentials);
+        console.log(chalk.green("Type \"exit\" to exit this process anytime"));
+        var bool_overwrite = prompt("Existing keys will be overwritten. Are you sure? (Yes/No) ");
+        if (bool_overwrite === null)
+        {
+            process.exit(1);
+        }
+        bool_overwrite = bool_overwrite.trim();
+        while (bool_overwrite !== "" && bool_overwrite !== "Y" && bool_overwrite !== "y" && bool_overwrite !== "yes" && bool_overwrite !== "N" && bool_overwrite !== "n" && bool_overwrite !== "no" && bool_overwrite !== "exit")
+        {
+            var bool_overwrite = prompt("Existing keys will be overwritten. Are you sure?(Y/N) ");
+            if (bool_overwrite === null)
+            {
+                process.exit(1);
+            }
+            bool_overwrite = bool_overwrite.trim();
+        }
+        if (bool_overwrite === "exit")
+        {
+            process.exit(1);
+        }
+        if (bool_overwrite === "Y" || bool_overwrite === "y" || bool_overwrite.toLowerCase() === "yes")
+        {
+            var consumer_key = prompt.hide(ask, {echo : "Enter the consumer key provided by twitter"});
+        }
+        else if (bool_overwrite === "N" || bool_overwrite === "n" || bool_overwrite.toLowerCase() === "no")
+        {
+            process.exit(1);
+        }
     }
     else if (process.argv[2] === "tweet" || process.argv[2] === "retweet")
     {
