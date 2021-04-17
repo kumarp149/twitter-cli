@@ -6,7 +6,13 @@ const set_credentials = require('./../lib/init.js');
 
 const { command } = require('commander');
 
+const askPrompt = require("../lib/init.js");
+
+const session = require("../config/config.json");
+
 const command_args = [];
+
+const fs = require("fs");
 
 command_args[0] = {command: "init",description: "command to set twitter developer credentials"};
 
@@ -87,7 +93,22 @@ else if (process.argv.length === 3)
     }
     else if (process.argv[2] === "init")
     {
-
+        askPrompt.overwrite()
+        .then((result) => {
+            console.log("SRUTEESH");
+            console.log(result);
+        })
+        //process.exit(1)
+        askPrompt.askcredentials()
+        .then((result) => {
+            fs.writeFile(__dirname + "/../config/config.json",JSON.stringify(result),err=>{
+                if (err){
+                    console.log(err);
+                    console.log(chalk.red("Error setting up credentials. Add the credentials manually in \"config/config.json\""));
+                }
+            })
+        })
+        //console.log(credentials);
     }
     else if (process.argv[2] === "tweet" || process.argv[2] === "retweet")
     {
