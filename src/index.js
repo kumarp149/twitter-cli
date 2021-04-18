@@ -12,7 +12,7 @@ const session = require("../config/config.json");
 
 const readline = require("readline");
 
-const prompt = require('prompt-sync')();
+const prompt_lib = require('prompt-sync')();
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -103,7 +103,7 @@ else if (process.argv.length === 3)
     else if (process.argv[2] === "init")
     {
         console.log(chalk.green("Type \"exit\" to exit this process anytime"));
-        var bool_overwrite = prompt("Existing keys will be overwritten. Are you sure? (Yes/No) ");
+        var bool_overwrite = prompt_lib("Existing keys will be overwritten. Are you sure? (Yes/No) ");
         if (bool_overwrite === null)
         {
             process.exit(1);
@@ -111,7 +111,7 @@ else if (process.argv.length === 3)
         bool_overwrite = bool_overwrite.trim();
         while (bool_overwrite !== "" && bool_overwrite !== "Y" && bool_overwrite !== "y" && bool_overwrite !== "yes" && bool_overwrite !== "N" && bool_overwrite !== "n" && bool_overwrite !== "no" && bool_overwrite !== "exit")
         {
-            var bool_overwrite = prompt("Existing keys will be overwritten. Are you sure?(Y/N) ");
+            var bool_overwrite = prompt_lib("Existing keys will be overwritten. Are you sure?(Y/N) ");
             if (bool_overwrite === null)
             {
                 process.exit(1);
@@ -122,9 +122,54 @@ else if (process.argv.length === 3)
         {
             process.exit(1);
         }
-        if (bool_overwrite === "Y" || bool_overwrite === "y" || bool_overwrite.toLowerCase() === "yes")
+        if (bool_overwrite === "Y" || bool_overwrite === "y" || bool_overwrite.toLowerCase() === "yes" || bool_overwrite === "")
         {
-            var consumer_key = prompt.hide(ask, {echo : "Enter the consumer key provided by twitter"});
+            askPrompt.q1()
+            .then((value1) => {
+                if (value1.consumer_key === "exit"){
+                    process.exit(1);
+                }
+                else{
+                    val1 = value1.consumer_key;
+                    askPrompt.q2()
+                    .then((value2) => {
+                        if (value2.consumer_secret === "exit"){
+                            process.exit(1);
+                        }
+                        else{
+                            val2 = value2.consumer_secret;
+                            askPrompt.q3()
+                            .then((value3) => {
+                                if (value3.access_token_key === "exit"){
+                                    process.exit(1);
+                                }
+                                else{
+                                    val3 = value3.access_token_key;
+                                    askPrompt.q4()
+                                    .then((value4) => {
+                                        if (value4.access_token_secret === "exit"){
+                                            process.exit(1);
+                                        }
+                                        else{
+                                            val4 = value4.access_token_secret;
+                                            var temp_json = {"consumer_key": val1,"consumer_secret": val2,"access_token_key": val3,"access_token_secret": val4};
+                                            fs.writeFile(__dirname + '/../config/config.json',JSON.stringify(temp_json),err => {
+                                                if (err){
+                                                    console.log(err);
+                                                    console.log(chalk.red("Error setting up credentials. Add the credentials manually in \"config/config.json\""));
+                                                }
+                                                else{
+                                                    console.log(chalk.green("Credentials succesfully set. You can now tweet and retweet"));
+                                                }
+                                            })
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            })
         }
         else if (bool_overwrite === "N" || bool_overwrite === "n" || bool_overwrite.toLowerCase() === "no")
         {
