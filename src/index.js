@@ -2,12 +2,6 @@
 //const parseArgs = require('minimist');
 const chalk = require('chalk');
 
-const set_credentials = require('./../lib/init.js');
-
-const { command } = require('commander');
-
-const askPrompt = require("../lib/init.js");
-
 const session = require("../config/config.json");
 
 const readline = require("readline");
@@ -18,7 +12,6 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
 const command_args = [];
 
 const fs = require("fs");
@@ -108,7 +101,7 @@ else if (process.argv.length === 3)
         {
             process.exit(1);
         }
-        bool_overwrite = bool_overwrite.trim();
+        bool_overwrite = bool_overwrite.trim().toLowerCase();
         while (bool_overwrite !== "" && bool_overwrite !== "Y" && bool_overwrite !== "y" && bool_overwrite !== "yes" && bool_overwrite !== "N" && bool_overwrite !== "n" && bool_overwrite !== "no" && bool_overwrite !== "exit")
         {
             var bool_overwrite = prompt_lib("Existing keys will be overwritten. Are you sure?(Y/N) ");
@@ -116,7 +109,7 @@ else if (process.argv.length === 3)
             {
                 process.exit(1);
             }
-            bool_overwrite = bool_overwrite.trim();
+            bool_overwrite = bool_overwrite.trim().toLowerCase();
         }
         if (bool_overwrite === "exit")
         {
@@ -124,50 +117,60 @@ else if (process.argv.length === 3)
         }
         if (bool_overwrite === "Y" || bool_overwrite === "y" || bool_overwrite.toLowerCase() === "yes" || bool_overwrite === "")
         {
-            askPrompt.q1()
-            .then((value1) => {
-                if (value1.consumer_key === "exit"){
+            var c_key = prompt_lib.hide("Enter your consumer key [hidden]: ");
+            if (c_key === null || c_key === "exit"){
+                process.exit(1);
+            }
+            while (c_key !== null && c_key !== "exit" && c_key.length === 0){
+                c_key = prompt_lib.hide(chalk.red("Please enter your consumer key [hidden]: "));
+            }
+            if (c_key === null || c_key === "exit"){
+                process.exit(1);
+            }
+
+
+            var c_secret = prompt_lib.hide("Enter your consumer secret [hidden]: ");
+            if (c_secret === null || c_secret === "exit"){
+                process.exit(1);
+            }
+            while (c_secret !== null && c_secret !== "exit" && c_secret.length === 0){
+                c_secret = prompt_lib.hide(chalk.red("Please enter your consumer secret [hidden]: "));
+            }
+            if (c_secret === null || c_secret === "exit"){
+                process.exit(1);
+            }
+
+
+            var at_key = prompt_lib.hide("Enter your access token key [hidden]: ");
+            if (at_key === null || at_key === "exit"){
+                process.exit(1);
+            }
+            while (at_key !== null && at_key !== "exit" && at_key.length === 0){
+                at_key = prompt_lib.hide(chalk.red("Please enter your access token key [hidden]: "));
+            }
+            if (at_key === null || at_key === "exit"){
+                process.exit(1);
+            }
+
+            var at_secret = prompt_lib.hide("Enter your access token secret [hidden]: ");
+            if (at_secret === null || at_secret === "exit"){
+                process.exit(1);
+            }
+            while (at_secret !== null && at_secret !== "exit" && at_secret.length === 0){
+                at_secret = prompt_lib.hide(chalk.red("Please enter your access token secret [hidden]: "));
+            }
+            if (at_secret === null || at_secret === "exit"){
+                process.exit(1);
+            }
+            let json_write = {"consumer_key": c_key,"consumer_secret": c_secret,"access_token_key": at_key,"access_token_secret": at_secret};
+            fs.writeFile(__dirname + '/../config/config.json',JSON.stringify(json_write),function(err){
+                if (err){
+                    console.log(chalk.red("Error setting up credentials. Add credentials to config/config.json manually"));
                     process.exit(1);
                 }
                 else{
-                    val1 = value1.consumer_key;
-                    askPrompt.q2()
-                    .then((value2) => {
-                        if (value2.consumer_secret === "exit"){
-                            process.exit(1);
-                        }
-                        else{
-                            val2 = value2.consumer_secret;
-                            askPrompt.q3()
-                            .then((value3) => {
-                                if (value3.access_token_key === "exit"){
-                                    process.exit(1);
-                                }
-                                else{
-                                    val3 = value3.access_token_key;
-                                    askPrompt.q4()
-                                    .then((value4) => {
-                                        if (value4.access_token_secret === "exit"){
-                                            process.exit(1);
-                                        }
-                                        else{
-                                            val4 = value4.access_token_secret;
-                                            var temp_json = {"consumer_key": val1,"consumer_secret": val2,"access_token_key": val3,"access_token_secret": val4};
-                                            fs.writeFile(__dirname + '/../config/config.json',JSON.stringify(temp_json),err => {
-                                                if (err){
-                                                    console.log(err);
-                                                    console.log(chalk.red("Error setting up credentials. Add the credentials manually in \"config/config.json\""));
-                                                }
-                                                else{
-                                                    console.log(chalk.green("Credentials succesfully set. You can now tweet and retweet"));
-                                                }
-                                            })
-                                        }
-                                    })
-                                }
-                            })
-                        }
-                    })
+                    console.log(chalk.green("Credentials succesfully set"));
+                    process.exit(1);
                 }
             })
         }
