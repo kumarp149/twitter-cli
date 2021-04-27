@@ -26,6 +26,7 @@ const error_codes
     135: ["Authentication error","Timestamp out of bounds, check your system clock"],
     139: ["Like error","You have liked the tweet already"],
     144: ["Invalid status Id","There is no tweet with the id mentioned"],
+    170: ["Empty message","Message cannot be empty"],
     179: ["Private status","You are not authorized to retweet the tweet"],
     185: ["Daily tweet limit","You have exhausted your daily tweet limit"],
     186: ["Long tweet","The text in the tweet is too long"],
@@ -316,7 +317,7 @@ else if (process.argv.length === 5)
                     }
                     else if (error){
                         let str = error[0].code;
-                        if (error_codes[str] !== null){
+                        if (error_codes[str] !== undefined){
                             console.log(chalk.red("[ERROR]: "+error_codes[str][0]));
                             console.log(chalk.red("Error Description: "+error_codes[str][1]));
                             process.exit(1);
