@@ -37,7 +37,7 @@ npm start
 
 
    [dill]: <https://github.com/joemccann/dillinger>
-   [prompt_sync]: <https://www.npmjs.com/package/prompt-sync>
+   [prompt-sync]: <https://www.npmjs.com/package/prompt-sync>
    [chalk]: <https://www.npmjs.com/package/chalk>
    [twitter]: <https://www.npmjs.com/package/twitter>
    [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
