@@ -4,7 +4,6 @@
   "description": "tweet from the command line",
   "main": "src/index.js",
   "scripts": {
-    "build": "npm src/index.js",
     "start": "npm link && npm install"
   },
   "bin": {
