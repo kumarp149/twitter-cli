@@ -8,6 +8,7 @@
 
 - Tweet a message from the command line
 - You can provide an optional image along with the message
+- You can retweet a tweet
 
 
 
@@ -15,9 +16,9 @@
 
 It uses a number of open source projects to work:
 
-- [inquirer] - Used for asking twitter developer credentials
+- [twitter] - SDK used for tweeting and retweeting
 - [chalk] - Used for styling console outputs
-- [dotenv] - Used for storing twitter developer credentials locally
+- [prompt-sync] - Used for taking developer credentials through command line
 
 ## Usage
 
@@ -36,9 +37,9 @@ npm start
 
 
    [dill]: <https://github.com/joemccann/dillinger>
-   [inquirer]: <https://www.npmjs.com/package/inquirer>
+   [prompt_sync]: <https://www.npmjs.com/package/prompt-sync>
    [chalk]: <https://www.npmjs.com/package/chalk>
-   [dotenv]: <https://www.npmjs.com/package/dotenv>
+   [twitter]: <https://www.npmjs.com/package/twitter>
    [PlDb]: <https://github.com/joemccann/dillinger/tree/master/plugins/dropbox/README.md>
    [PlGh]: <https://github.com/joemccann/dillinger/tree/master/plugins/github/README.md>
    [PlGd]: <https://github.com/joemccann/dillinger/tree/master/plugins/googledrive/README.md>
