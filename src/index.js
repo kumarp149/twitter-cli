@@ -29,7 +29,7 @@ const error_codes
     170: ["Empty message","Message cannot be empty"],
     179: ["Private status","You are not authorized to retweet the tweet"],
     185: ["Daily tweet limit","You have exhausted your daily tweet limit"],
-    186: ["Long tweet","The text in the tweet is too long"],
+    186: ["Long tweet","The text in the tweet is too long. Try reducing the size of the message and try again"],
     187: ["Duplicate tweet","Tweet is duplicate. Try modifying the text or image"],
     203: ["Device error","There is an error with the device"],
     215: ["Bad authentication","Invalid authentication. Reset the credentials with \"twitter init\""],
